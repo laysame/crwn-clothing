@@ -49,5 +49,8 @@
   },
   "devDependencies": {
     "sass": "^1.49.7"
+  },
+  "resolutions": {
+    "babel-jest": "24.7.1"
   }
 }

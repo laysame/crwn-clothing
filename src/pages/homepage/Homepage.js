@@ -8,5 +8,5 @@ export default function Homepage() {
         <div className='homepage'>
           <Directory />
         </div>
-    )
+    );
 }
