@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../components/collection-item/Collection-item.scss';
 
-export default function CollectionItem({ id, name, price, imageUrl }) {
+export default function CollectionItem({ name, price, imageUrl }) {
     return (
         <div className='collection-item'>
             <div className='image'
@@ -10,7 +10,6 @@ export default function CollectionItem({ id, name, price, imageUrl }) {
                 <span className='name'>{name}</span>
                 <span className='price'>{price}</span>
             </div>
-
         </div>
     )
 }
