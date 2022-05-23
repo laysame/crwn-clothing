@@ -4,7 +4,7 @@ import Homepage from "./pages/homepage/Homepage";
 import ShopPage from "./shop/ShopPage";
 import Header from "./components/header-component/Header";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up page/SignInAndSignUpPage";
-import {auth} from './firebase/Firebase.Utils';
+import {auth, createUserProfileDocument, signInWithGoogle} from './firebase/Firebase.Utils';
 
 import './App.css';
 
@@ -19,11 +19,16 @@ class App extends React.Component {
 
     unsubscribeFromAuth = null;
 
-    componentDidMount() {
-        this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-            this.setState({currentUser: user});
+    handleSignIn = event => {
+        signInWithGoogle().then((currentUser) => {
+            console.log("caralho")
+            this.setState({currentUser: currentUser});
+        });
+    }
 
-            console.log(user)
+    componentDidMount() {
+        this.unsubscribeFromAuth = auth.onAuthStateChanged( async user => {
+            createUserProfileDocument(user);
         })
     }
 
@@ -38,7 +43,9 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path={'/'} component={Homepage}/>
                     <Route path={'/shop'} component={ShopPage}/>
-                    <Route path={'/signin'} component={SignInAndSignUpPage}/>
+                    <Route path={'/signin'}
+                           render={(props) => <SignInAndSignUpPage {...props} onSignIn={this.handleSignIn} />}
+                    />
                 </Switch>
             </div>
         );
