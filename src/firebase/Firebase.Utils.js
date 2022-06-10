@@ -3,9 +3,9 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
 import {initializeApp} from "firebase/app";
-import {getAuth, signInWithPopup} from "firebase/auth";
+import {getAuth, signInWithPopup, signInWithRedirect, GoogleAuthProvider} from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
-import {doc, setDoc, getDoc} from "firebase/firestore";
+import {doc, getDoc, setDoc,} from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -18,25 +18,28 @@ const firebaseConfig = {
     measurementId: "G-9CRG340MT9"
 };
 
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-export const auth = getAuth(app);
+const firebaseApp = initializeApp(firebaseConfig);
 
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
+
     if (!userAuth) return; //exits the function
 
     const userRef = doc(db, 'users', userAuth.uid);
-    const snapShot = await getDoc(userRef);
+    const userSnapShot = await getDoc(userRef);
 
-    if (!snapShot.exists()) {
+    // check if the snapshot does not exist
+    // set it inside the database
+    if (!userSnapShot.exists()) {
+
+        const {name, email} = userAuth;
+        const createdAt = new Date();
+
         try {
             await setDoc(userRef, {
-                email: userAuth.email,
-                name: userAuth.displayName,
-                createdAt: new Date()
+                name,
+                email,
+                createdAt
             }, {merge: true});
 
         } catch (error) {
@@ -47,8 +50,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 }
 
-const provider = new firebase.auth.GoogleAuthProvider();
+const provider = new GoogleAuthProvider();
 provider.setCustomParameters({prompt: 'select_account'});
+
+export const db = getFirestore(firebaseApp);
+export const auth = getAuth(firebaseApp);
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
 
 
