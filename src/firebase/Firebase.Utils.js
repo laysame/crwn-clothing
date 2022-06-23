@@ -3,7 +3,7 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
 import {initializeApp} from "firebase/app";
-import {getAuth, signInWithPopup, signInWithRedirect, GoogleAuthProvider} from "firebase/auth";
+import {getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword} from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
 import {doc, getDoc, setDoc,} from "firebase/firestore";
 
@@ -21,7 +21,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
+export const createUserProfileDocument = async (userAuth, additionalData = {}) => {
 
     if (!userAuth) return; //exits the function
 
@@ -32,29 +32,37 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     // set it inside the database
     if (!userSnapShot.exists()) {
 
-        const {name, email} = userAuth;
+        const {displayName, email} = userAuth;
         const createdAt = new Date();
 
         try {
             await setDoc(userRef, {
-                name,
+                displayName,
                 email,
-                createdAt
+                createdAt,
+                ...additionalData,
             }, {merge: true});
 
         } catch (error) {
-            console.log('Error creating user', error.message);
+            console.log('Error creating user:', error.message);
         }
         return userRef;
     }
 
 }
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({prompt: 'select_account'});
+const googleAuthProvider = new GoogleAuthProvider();
+googleAuthProvider.setCustomParameters({prompt: 'select_account'});
 
 export const db = getFirestore(firebaseApp);
 export const auth = getAuth(firebaseApp);
-export const signInWithGoogle = () => signInWithPopup(auth, provider);
+export const signInWithGoogle = () => signInWithPopup(auth, googleAuthProvider);
+export const signInWithGoogleRedirect = () => signInWithGoogleRedirect(auth, googleAuthProvider);
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+
+    return await createUserWithEmailAndPassword(auth, email, password);
+}
 
 
