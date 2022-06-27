@@ -5,6 +5,8 @@ import {
     createAuthUserWithEmailAndPassword,
     createUserProfileDocument,
 } from "../../firebase/Firebase.Utils";
+import FormInput from "../form-input/FormInput";
+import CustomButton from "../custom-button/CustomButton";
 
 
 export default function SignUpForm() {
@@ -48,23 +50,25 @@ export default function SignUpForm() {
         setFormFields({...formFields, [name]: value})
     }
 
-    return (<div>
-        <h1>Sign up with your email and password</h1>
-        <form onSubmit={handleSubmit}>
-            <label>Display Name</label>
-            <input type="text" required={true} onChange={handleChange} name="displayName" value={displayName}/>
+    return (
+        <div className='sign-up-container'>
+            <h2>Don't have an account?</h2>
+            <span>Sign up with your email and password</span>
+            <form onSubmit={handleSubmit}>
 
-            <label>Email</label>
-            <input type="email" required={true} onChange={handleChange} name="email" value={email}/>
+                <FormInput type="text" required={true} onChange={handleChange} name="displayName" value={displayName}
+                           label={'Display Name'}/>
 
-            <label>Password</label>
-            <input type="password" required={true} onChange={handleChange} name="password" value={password}/>
+                <FormInput type="email" required={true} onChange={handleChange} name="email" value={email}
+                           label={'Email'}/>
 
-            <label>Confirm Password</label>
-            <input type="password" required={true} onChange={handleChange} name="confirmPassword"
-                   value={confirmPassword}/>
+                <FormInput type="password" required={true} onChange={handleChange} name="password" value={password}
+                           label={'Password'}/>
 
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>)
+                <FormInput type="password" required={true} onChange={handleChange} name="confirmPassword"
+                           value={confirmPassword} label={'Confirm Password'}/>
+
+                <CustomButton type="submit">Sign Up</CustomButton>
+            </form>
+        </div>)
 }
