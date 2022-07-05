@@ -1,35 +1,39 @@
-import React from 'react';
+import React, {Fragment, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
-import {auth} from "../../firebase/Firebase.Utils";
+import {auth} from '../../firebase/Firebase.Utils';
+import {UserContext} from '../../context/User.Context';
 
 import '../../components/header-component/Header.scss';
 
-export default function Header({currentUser}) {
-    return (
-        <div className='header'>
-            <Link className='logo-container' to='/'>
-                <Logo className='logo'/>
-            </Link>
-            <div className='options'>
-                <Link className='option' to='/shop'>
-                    SHOP
-                </Link>
-                <Link className='option' to='/shop'>
-                    CONTACT
-                </Link>
 
-                {
-                    currentUser ?
+export default function Header() {
+
+    const {currentUser} = useContext(UserContext);
+    console.log(currentUser);
+
+    return (
+        <Fragment>
+            <div className='header'>
+                <Link className='logo-container' to='/'>
+                    <Logo className='logo'/>
+                </Link>
+                <div className='links-container'>
+                    <Link className='option' to='/shop'>
+                        SHOP
+                    </Link>
+                    <Link className='option' to='/contact'>
+                        CONTACT
+                    </Link>
+                    {currentUser ?
                         <div className='option' onClick={() => auth.signOut()}>
                             SIGN OUT
-                        </div>
-                        :
-                        <Link className='option' to='/signin'>
+                        </div> :
+                        <Link className='option' to='/auth'>
                             SIGN IN
-                        </Link>
-                }
+                        </Link>}
+                </div>
             </div>
-        </div>
+        </Fragment>
     )
 }

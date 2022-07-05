@@ -1,10 +1,12 @@
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
-import Homepage from "./pages/homepage/Homepage";
-import ShopPage from "./shop/ShopPage";
-import Header from "./components/header-component/Header";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up page/SignInAndSignUpPage";
-import {auth, createUserProfileDocument, signInWithGoogle} from './firebase/Firebase.Utils';
+import {auth, db, createUserProfileDocument, signInWithGoogle} from './firebase/Firebase.Utils';
+import {doc, onSnapshot} from "firebase/firestore";
+
+import Homepage from './pages/homepage/Homepage';
+import ShopPage from './shop/ShopPage';
+import Header from './components/header-component/Header';
+import Authentication from './pages/authentication/Authentication';
 
 import './App.css';
 
@@ -19,22 +21,34 @@ class App extends React.Component {
 
     unsubscribeFromAuth = null;
 
-    handleSignIn = event => {
-        signInWithGoogle().then((currentUser) => {
-            console.log("caralho")
-            this.setState({currentUser: currentUser});
-        });
-    }
-
     componentDidMount() {
-        this.unsubscribeFromAuth = auth.onAuthStateChanged( async user => {
-            createUserProfileDocument(user);
+
+        this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+
+            // make sure that the current user is got from the object of userAuth - changed the parameter user to userAuth
+            if (userAuth) {
+                const userRef = await createUserProfileDocument(userAuth); //get back the object using this function
+
+                const unsub = onSnapshot(doc(db, "users", userAuth.uid), (snapshot) => {
+                    this.setState({
+                        currentUser: {
+                            id: snapshot.id,
+                            ...snapshot.data()
+                        }
+                    })
+                    console.log("Current data: ", snapshot.data());
+                });
+
+            } else {
+                this.setState({currentUser: null});
+            }
         })
     }
 
     componentWillUnmount() {
         this.unsubscribeFromAuth();
     }
+
 
     render() {
         return (
@@ -43,8 +57,9 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path={'/'} component={Homepage}/>
                     <Route path={'/shop'} component={ShopPage}/>
-                    <Route path={'/signin'}
-                           render={(props) => <SignInAndSignUpPage {...props} onSignIn={this.handleSignIn} />}
+                    <Route path={'/auth'}
+                           render={(props) =>
+                               <Authentication {...props}/>}
                     />
                 </Switch>
             </div>

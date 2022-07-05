@@ -1,13 +1,17 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import FormInput from "../form-input/FormInput";
 import CustomButton from "../custom-button/CustomButton";
-import './SignInForm.scss';
 import {
     signInWithGoogle,
     createUserProfileDocument, signInAuthUserWithEmailAndPassword
-} from "../../firebase/Firebase.Utils";
+} from '../../firebase/Firebase.Utils';
+import {UserContext} from '../../context/User.Context';
 
-export default function SignIn() {
+import './SignInForm.scss';
+
+export default function SignInForm() {
+
+    const {setCurrentUser} = useContext(UserContext);
 
     const defaultFormFields = {
         email: '', password: ''
@@ -24,11 +28,22 @@ export default function SignIn() {
         event.preventDefault();
 
         try {
-            const response = await signInAuthUserWithEmailAndPassword(email, password);
-            console.log(response)
+            const {user} = await signInAuthUserWithEmailAndPassword(email, password);
+            setCurrentUser(user); //whenever the user value comes back (method from context)
+
+            resetFormFields();
 
         } catch (error) {
-
+            switch (error.code) {
+                case 'auth/wrong-password':
+                    alert('Incorrect password to this email')
+                    break;
+                case 'auth/user-not-found':
+                    alert('No user associated with this email')
+                    break;
+                default:
+                    console.log(error);
+            }
         }
     }
 
@@ -58,7 +73,7 @@ export default function SignIn() {
 
                 <div className='buttons'>
                     <CustomButton type="submit">Sign in</CustomButton>
-                    <CustomButton onClick={logGoogleUser} buttonType={'google'}>
+                    <CustomButton type="button" onClick={logGoogleUser} buttonType={'google'}>
                         Sign in with Google
                     </CustomButton>
                 </div>

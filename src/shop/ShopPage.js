@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import SHOP_DATA from "./ShopData";
 import CollectionPreview from "../components/collection-preview/CollectionPreview";
 
-
 export default function ShopPage() {
 
     const [collection] = useState(SHOP_DATA);
@@ -14,7 +13,6 @@ export default function ShopPage() {
                     <CollectionPreview key={id} {...otherCollectionProps} />
                 ))
             }
-
         </div>
 
     )
