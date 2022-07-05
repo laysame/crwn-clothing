@@ -1,7 +1,7 @@
 import React, {Fragment, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
-import {auth} from '../../firebase/Firebase.Utils';
+import {signOutUser} from '../../firebase/Firebase.Utils';
 import {UserContext} from '../../context/User.Context';
 
 import '../../components/header-component/Header.scss';
@@ -9,8 +9,13 @@ import '../../components/header-component/Header.scss';
 
 export default function Header() {
 
-    const {currentUser} = useContext(UserContext);
+    const {currentUser, setCurrentUser} = useContext(UserContext);
     console.log(currentUser);
+
+    const signOutHandler = async () => {
+        await signOutUser();
+        setCurrentUser(null)
+    }
 
     return (
         <Fragment>
@@ -26,7 +31,7 @@ export default function Header() {
                         CONTACT
                     </Link>
                     {currentUser ?
-                        <div className='option' onClick={() => auth.signOut()}>
+                        <div className='option' onClick={signOutHandler}>
                             SIGN OUT
                         </div> :
                         <Link className='option' to='/auth'>

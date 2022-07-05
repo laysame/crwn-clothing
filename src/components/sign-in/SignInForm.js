@@ -57,6 +57,8 @@ export default function SignInForm() {
     async function logGoogleUser() {
         const {user} = await signInWithGoogle();
         const userRef = await createUserProfileDocument(user);
+        setCurrentUser(user);
+        console.log("UserRef", userRef);
     }
 
     return (

@@ -1,7 +1,5 @@
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
-import {auth, db, createUserProfileDocument, signInWithGoogle} from './firebase/Firebase.Utils';
-import {doc, onSnapshot} from "firebase/firestore";
 
 import Homepage from './pages/homepage/Homepage';
 import ShopPage from './shop/ShopPage';
@@ -22,8 +20,8 @@ class App extends React.Component {
     unsubscribeFromAuth = null;
 
     componentDidMount() {
-
-        this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+/*
+ this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
             // make sure that the current user is got from the object of userAuth - changed the parameter user to userAuth
             if (userAuth) {
@@ -37,12 +35,14 @@ class App extends React.Component {
                         }
                     })
                     console.log("Current data: ", snapshot.data());
+                    console.log("UserRef:", userRef );
                 });
 
             } else {
                 this.setState({currentUser: null});
             }
         })
+ */
     }
 
     componentWillUnmount() {

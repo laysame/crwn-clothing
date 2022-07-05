@@ -34,12 +34,12 @@ export default function SignUpForm() {
         }
         try {
             const {user} = await createAuthUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, {displayName});
             setCurrentUser(user);
 
+            await createUserProfileDocument(user, {displayName});
             resetFormFields();
         } catch (error) {
-            if (error.code == 'auth/email-already-in-use') {
+            if (error.code === 'auth/email-already-in-use') {
                 alert('Cannot create user, email already in use')
             } else {
                 console.log('Error creating user:', error.message);
