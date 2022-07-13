@@ -1,11 +1,10 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {
     createAuthUserWithEmailAndPassword,
     createUserProfileDocument,
 } from '../../firebase/Firebase.Utils';
 import FormInput from "../form-input/FormInput";
 import CustomButton from "../custom-button/CustomButton";
-import {UserContext} from "../../context/User.Context";
 
 import "./SignUpForm.scss";
 
@@ -17,9 +16,6 @@ export default function SignUpForm() {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {displayName, email, password, confirmPassword} = formFields;
-    const {setCurrentUser} = useContext(UserContext);
-
-    console.log(formFields)
 
     function resetFormFields() {
         setFormFields(defaultFormFields);
@@ -30,11 +26,10 @@ export default function SignUpForm() {
 
         if (password !== confirmPassword) {
             alert("Password does not match");
-            return; //exits
+            return; //exit the function
         }
         try {
             const {user} = await createAuthUserWithEmailAndPassword(email, password);
-            setCurrentUser(user);
 
             await createUserProfileDocument(user, {displayName});
             resetFormFields();

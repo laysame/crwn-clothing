@@ -1,17 +1,13 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import FormInput from "../form-input/FormInput";
 import CustomButton from "../custom-button/CustomButton";
 import {
-    signInWithGoogle,
-    createUserProfileDocument, signInAuthUserWithEmailAndPassword
+    signInAuthUserWithEmailAndPassword, signInWithGooglePopup
 } from '../../firebase/Firebase.Utils';
-import {UserContext} from '../../context/User.Context';
 
 import './SignInForm.scss';
 
 export default function SignInForm() {
-
-    const {setCurrentUser} = useContext(UserContext);
 
     const defaultFormFields = {
         email: '', password: ''
@@ -29,7 +25,6 @@ export default function SignInForm() {
 
         try {
             const {user} = await signInAuthUserWithEmailAndPassword(email, password);
-            setCurrentUser(user); //whenever the user value comes back (method from context)
 
             resetFormFields();
 
@@ -54,11 +49,8 @@ export default function SignInForm() {
         setFormFields({...formFields, [name]: value})
     }
 
-    async function logGoogleUser() {
-        const {user} = await signInWithGoogle();
-        const userRef = await createUserProfileDocument(user);
-        setCurrentUser(user);
-        console.log("UserRef", userRef);
+    async function signInWithGoogle() {
+        await signInWithGooglePopup();
     }
 
     return (
@@ -75,7 +67,7 @@ export default function SignInForm() {
 
                 <div className='buttons'>
                     <CustomButton type="submit">Sign in</CustomButton>
-                    <CustomButton type="button" onClick={logGoogleUser} buttonType={'google'}>
+                    <CustomButton type="button" onClick={signInWithGoogle} buttonType={'google'}>
                         Sign in with Google
                     </CustomButton>
                 </div>

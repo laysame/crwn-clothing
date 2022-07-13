@@ -8,7 +8,8 @@ import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    signOut
+    signOut,
+    onAuthStateChanged
 } from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
 import {doc, getDoc, setDoc,} from "firebase/firestore";
@@ -62,7 +63,7 @@ googleAuthProvider.setCustomParameters({prompt: 'select_account'});
 
 export const db = getFirestore(firebaseApp);
 export const auth = getAuth(firebaseApp);
-export const signInWithGoogle = () => signInWithPopup(auth, googleAuthProvider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleAuthProvider);
 export const signInWithGoogleRedirect = () => signInWithGoogleRedirect(auth, googleAuthProvider);
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -81,3 +82,6 @@ export const signOutUser = async () => {
     return await signOut(auth);
 }
 
+export const onAuthStateChangedListener = (callback) => {
+    return onAuthStateChanged(auth, callback);
+}
