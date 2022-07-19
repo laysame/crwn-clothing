@@ -1,7 +1,8 @@
 import React from 'react';
-import './Authentication.scss';
 import SignUpForm from '../../components/sign-up/SignUpForm';
 import SignInForm from '../../components/sign-in/SignInForm';
+
+import './Authentication.scss';
 
 export default function Authentication() {
     return (

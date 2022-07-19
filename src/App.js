@@ -7,6 +7,7 @@ import Header from './components/header-component/Header';
 import Authentication from './pages/authentication/Authentication';
 
 import './App.css';
+import CartDropdown from "./components/cart-dropdown/CartDropdown";
 
 export default function App() {
     return (
@@ -16,8 +17,8 @@ export default function App() {
                 <Route exact path={'/'} component={Homepage}/>
                 <Route path={'/shop'} component={ShopPage}/>
                 <Route path={'/auth'}
-                       render={(props) =>
-                           <Authentication {...props}/>}
+                       render={() =>
+                           <Authentication />}
                 />
             </Switch>
         </div>
