@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {ProductsContext} from '../context/Products.Context';
-import ProductCard from "../components/collection-item/ProductCard";
+import ProductCard from "../components/product-card/ProductCard";
 
 import './ShopPage.scss';
 

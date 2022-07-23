@@ -7,7 +7,6 @@ import Header from './components/header-component/Header';
 import Authentication from './pages/authentication/Authentication';
 
 import './App.css';
-import CartDropdown from "./components/cart-dropdown/CartDropdown";
 
 export default function App() {
     return (
