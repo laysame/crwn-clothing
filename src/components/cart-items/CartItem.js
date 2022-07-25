@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import './CartItem.scss';
+import {CartContext} from "../../context/Cart.Context";
 
 export default function CartItem({cartItem}) {
 
     const {name, price, imageUrl, quantity} = cartItem;
 
-    console.log(quantity);
 
     return (
         <div className='cart-item-container'>
@@ -13,7 +13,7 @@ export default function CartItem({cartItem}) {
             <div className='item-details'>
                 <h2 className='name'>{name}</h2>
                 <span>{quantity}x</span>
-                <span>{price}</span>
+                <span>€{price}</span>
             </div>
         </div>
     )

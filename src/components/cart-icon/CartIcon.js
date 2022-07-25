@@ -6,17 +6,15 @@ import './CartIcon.scss';
 
 
 export default function CartIcon() {
-    const {cartItems} = useContext(CartContext);
+    const {cartCount} = useContext(CartContext);
 
     const {isCartOpen, setIsCartOpen} = useContext(CartContext);
     const ToggleSetIsCartOpen = () => setIsCartOpen(!isCartOpen);
-    const count = cartItems.reduce((accum, item) => accum + item.quantity, 0);
-
 
     return (
         <div className='cart-icon-container' onClick={ToggleSetIsCartOpen}>
             <ShoppingIcon className='shopping-icon'/>
-            <span className='item-count'>{count}</span>
+            <span className='item-count'>{cartCount}</span>
         </div>
     )
 }
