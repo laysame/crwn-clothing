@@ -1,36 +1,27 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 
 import './CheckoutPage.scss';
 import {CartContext} from "../../context/Cart.Context";
-import CustomButton from "../../components/custom-button/CustomButton";
+import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 
 
 export default function CheckoutPage() {
-    const {cartItems, addItemToCart, removeItemFromCart, total} = useContext(CartContext);
+    const {cartItems, total} = useContext(CartContext);
 
     return (
-        <div>
-            {
-                cartItems.map((cartItem) => {
-                    const {id, name, imageUrl, price, quantity} = cartItem;
-
-                    return (
-                        <div key={id}>
-                            <img src={imageUrl} alt={name}/>
-                            <h2>{name}</h2>
-                            <span>Quantity: {quantity}</span>
-                            <br/>
-                            <span>Price: €{price}</span>
-                            <CustomButton onClick={() => addItemToCart(cartItem)}>+</CustomButton>
-                            <br/>
-                            <CustomButton onClick={() => removeItemFromCart(cartItem)}>-</CustomButton>
-                        </div>
-                    )
-                })
-            }
-            <div>
-                <h3>Total: €{total}</h3>
+        <div className='checkout-container'>
+            <div className='checkout-header'>
+                <div className='header-block '><span>Product</span></div>
+                <div className='header-block '><span>Description</span></div>
+                <div className='header-block '><span>Quantity</span></div>
+                <div className='header-block '><span>Price</span></div>
+                <div className='header-block '><span>Remove</span></div>
             </div>
+
+            {cartItems.map((cartItem) => (
+                            <CheckoutItem key={cartItem.id} cartItem={cartItem}/>
+                ))}
+                <span className='total'>Total: €{total}</span>
         </div>
     )
 }

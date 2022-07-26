@@ -15,13 +15,13 @@ export default function CartDropdown() {
             <div className='cart-items'>
                 {cartItems.map(item => <CartItem key={item.id} cartItem={item}/>)}
             </div>
-
-            <Link to='/checkout'>
-                <CustomButton>GO TO CHECKOUT</CustomButton>
-            </Link>
             <div>
                 <h3>Total: €{total}</h3>
             </div>
+            <Link to='/checkout'>
+                <CustomButton>GO TO CHECKOUT</CustomButton>
+            </Link>
+
         </div>
     )
 }
