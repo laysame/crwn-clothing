@@ -6,7 +6,7 @@ import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 
 
 export default function CheckoutPage() {
-    const {cartItems, total} = useContext(CartContext);
+    const {cartItems, cartTotal} = useContext(CartContext);
 
     return (
         <div className='checkout-container'>
@@ -21,7 +21,7 @@ export default function CheckoutPage() {
             {cartItems.map((cartItem) => (
                             <CheckoutItem key={cartItem.id} cartItem={cartItem}/>
                 ))}
-                <span className='total'>Total: €{total}</span>
+                <span className='total'>Total: €{cartTotal}</span>
         </div>
     )
 }
