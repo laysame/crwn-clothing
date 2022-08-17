@@ -12,8 +12,7 @@ import {
     onAuthStateChanged
 } from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
-import {doc, getDoc, setDoc,} from "firebase/firestore";
-
+import {doc, query, getDoc, getDocs, setDoc, collection, writeBatch} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA8r6Fd8hgiTxcOyMS0hh47CWJeRjWkg5Y",
@@ -27,10 +26,9 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-
 export const createUserProfileDocument = async (userAuth, additionalData = {}) => {
 
-    if (!userAuth) return; //exits the function
+    if (!userAuth) return;
 
     const userRef = doc(db, 'users', userAuth.uid);
     const userSnapShot = await getDoc(userRef);
@@ -44,10 +42,7 @@ export const createUserProfileDocument = async (userAuth, additionalData = {}) =
 
         try {
             await setDoc(userRef, {
-                displayName,
-                email,
-                createdAt,
-                ...additionalData,
+                displayName, email, createdAt, ...additionalData,
             }, {merge: true});
 
         } catch (error) {
@@ -62,8 +57,35 @@ const googleAuthProvider = new GoogleAuthProvider();
 googleAuthProvider.setCustomParameters({prompt: 'select_account'});
 
 export const db = getFirestore(firebaseApp);
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+    const batch = writeBatch(db);
+
+    objectsToAdd.forEach((object) => {
+        const docRef = doc(collectionRef, object.title.toLowerCase());
+        batch.set(docRef, object);
+    })
+    await batch.commit();
+}
+
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef);
+
+    const querySnapshot = await getDocs(q);
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+        const {title, items} = docSnapshot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {});
+    return categoryMap;
+}
+
 export const auth = getAuth(firebaseApp);
+
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleAuthProvider);
+
 export const signInWithGoogleRedirect = () => signInWithGoogleRedirect(auth, googleAuthProvider);
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {

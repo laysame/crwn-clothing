@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import MenuItem from '../../pages/menu-items/MenuItem';
-import '../../pages/menu-items/MenuItem.scss';
+import MenuItem from '../../routes/menu-items/MenuItem';
+import '../../routes/menu-items/MenuItem.scss';
 
 export default function Directory() {
     const [sections] = useState({
@@ -28,14 +28,14 @@ export default function Directory() {
                 imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
                 size: 'large',
                 id: 4,
-                linkUrl: 'shop/women',
+                linkUrl: 'shop/womens',
             },
             {
                 title: 'men',
                 imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
                 size: 'large',
                 id: 5,
-                linkUrl: 'shop/men'
+                linkUrl: 'shop/mens'
             }]
     });
 
