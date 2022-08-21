@@ -3,15 +3,10 @@ import './CategoryPreview.scss';
 import ProductCard from "../product-card/ProductCard";
 
 export default function CategoryPreview({title, products}) {
-
-    function handleClick() {
-    alert('test')
-    }
-
     return (
         <div className='category-preview-container'>
             <h2>
-                <span className='title' onClick={handleClick}>{title.toUpperCase()}</span>
+                <span className='title'>{title.toUpperCase()}</span>
             </h2>
             <div className='preview'>
                 {

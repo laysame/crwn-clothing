@@ -1,12 +1,13 @@
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
 
-import Homepage from './routes/homepage/Homepage';
+import Homepage from './pages/homepage/Homepage';
 import ShopPage from './shop/ShopPage';
 import Header from './components/header-component/Header';
-import Authentication from './routes/authentication/Authentication';
-import CheckoutPage from "./routes/checkout-page/CheckoutPage";
+import Authentication from './pages/authentication/Authentication';
+import CheckoutPage from "./pages/checkout-page/CheckoutPage";
 import './App.css';
+
 
 export default function App() {
     return (
@@ -14,13 +15,12 @@ export default function App() {
             <Header/>
             <Switch>
                 <Route exact path='/' component={Homepage}/>
-                <Route path='/shop' component={ShopPage}/>
+                <Route path='/shop/' component={ShopPage}/>
                 <Route path='/auth'
                        render={() =>
                            <Authentication/>}
                 />
                 <Route path='/checkout' component={CheckoutPage}/>
-
             </Switch>
         </div>
     )
