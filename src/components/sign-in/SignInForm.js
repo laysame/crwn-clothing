@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import FormInput from "../form-input/FormInput";
-import CustomButton from "../custom-button/CustomButton";
+import CustomButton, {buttonTypeClasses} from "../custom-button/CustomButton";
 import {
     signInAuthUserWithEmailAndPassword, signInWithGooglePopup
 } from '../../firebase/Firebase.Utils';
@@ -66,7 +66,7 @@ export default function SignInForm() {
 
                 <div className='buttons'>
                     <CustomButton type="submit">Sign in</CustomButton>
-                    <CustomButton type="button" onClick={signInWithGoogle} buttonType={'google'}>
+                    <CustomButton type="button" onClick={signInWithGoogle} buttonType={buttonTypeClasses.google}>
                         Sign in with Google
                     </CustomButton>
                 </div>

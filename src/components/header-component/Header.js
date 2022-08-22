@@ -16,17 +16,15 @@ export default function Header() {
     return (
         <Fragment>
             <HeaderContainer>
-
                 <LogoContainer to='/'>
-                    <Logo />
+                    <Logo/>
                 </LogoContainer>
-
                 <NavLinks>
                     <NavLink to='/shop'>
                         SHOP
                     </NavLink>
                     {currentUser ?
-                        <NavLink onClick={signOutUser}>
+                        <NavLink as='span' onClick={signOutUser}>
                             SIGN OUT
                         </NavLink> :
                         <NavLink to='/auth'>

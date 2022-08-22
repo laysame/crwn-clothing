@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
 
-import Homepage from './pages/homepage/Homepage';
+import Homepage from './routes/homepage/Homepage';
 import ShopPage from './shop/ShopPage';
 import Header from './components/header-component/Header';
-import Authentication from './pages/authentication/Authentication';
-import CheckoutPage from "./pages/checkout-page/CheckoutPage";
+import Authentication from './routes/authentication/Authentication';
+import CheckoutPage from "./routes/checkout-page/CheckoutPage";
 import './App.css';
 
 

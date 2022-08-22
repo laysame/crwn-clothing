@@ -2,26 +2,30 @@ import React, {useContext} from 'react';
 import CustomButton from "../custom-button/CustomButton";
 import CartItem from "../cart-items/CartItem";
 
-import './CartDropdown.scss';
 import {CartContext} from "../../context/Cart.Context";
 
 import {Link} from "react-router-dom";
+
+import {CartDropdownContainer, CartItems, EmptyMessage, ShowTotal} from "./CartDropdown-Styles.js";
 
 export default function CartDropdown() {
     const {cartItems} = useContext(CartContext);
     const {cartTotal} = useContext(CartContext);
     return (
-        <div className='cart-dropdown-container'>
-            <div className='cart-items'>
-                {cartItems.map(item => <CartItem key={item.id} cartItem={item}/>)}
-            </div>
-            <div>
-                <h3>Total: €{cartTotal}</h3>
-            </div>
+        <CartDropdownContainer>
+            <CartItems>
+                {
+                    cartItems.length ? (cartItems.map(item => <CartItem key={item.id} cartItem={item}/>))
+                        : (<EmptyMessage> Your cart is empty</EmptyMessage>)
+                }
+            </CartItems>
+            <ShowTotal>
+                Subtotal: €{cartTotal}
+            </ShowTotal>
             <Link to='/checkout'>
                 <CustomButton>GO TO CHECKOUT</CustomButton>
             </Link>
 
-        </div>
+        </CartDropdownContainer>
     )
 }
