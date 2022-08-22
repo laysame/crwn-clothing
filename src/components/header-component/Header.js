@@ -1,13 +1,12 @@
 import React, {Fragment, useContext} from 'react';
-import {Link} from 'react-router-dom';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
 import {UserContext} from '../../context/User.Context';
+import {CartContext} from "../../context/Cart.Context";
 import {signOutUser} from '../../firebase/Firebase.Utils';
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
-import {CartContext} from "../../context/Cart.Context";
 
-import '../../components/header-component/Header.scss';
+import {HeaderContainer, LogoContainer, NavLinks, NavLink} from "./Header-Styles";
 
 export default function Header() {
 
@@ -16,26 +15,30 @@ export default function Header() {
 
     return (
         <Fragment>
-            <div className='header'>
-                <Link className='logo-container' to='/'>
-                    <Logo className='logo'/>
-                </Link>
-                <div className='links-container'>
-                    <Link className='option' to='/shop'>
+            <HeaderContainer>
+
+                <LogoContainer to='/'>
+                    <Logo />
+                </LogoContainer>
+
+                <NavLinks>
+                    <NavLink to='/shop'>
                         SHOP
-                    </Link>
+                    </NavLink>
                     {currentUser ?
-                        <div className='option' onClick={signOutUser}>
+                        <NavLink onClick={signOutUser}>
                             SIGN OUT
-                        </div> :
-                        <Link className='option' to='/auth'>
+                        </NavLink> :
+                        <NavLink to='/auth'>
                             SIGN IN
-                        </Link>}
-                    <CartIcon />
-                </div>
-                    {isCartOpen && <CartDropdown/>}
-            </div>
+                        </NavLink>}
+                    <CartIcon/>
+                </NavLinks>
+                {isCartOpen && <CartDropdown/>}
+            </HeaderContainer>
         </Fragment>
+
+
     )
 }
 
