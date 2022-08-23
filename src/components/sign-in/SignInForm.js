@@ -5,7 +5,8 @@ import {
     signInAuthUserWithEmailAndPassword, signInWithGooglePopup
 } from '../../firebase/Firebase.Utils';
 
-import './SignInForm.scss';
+import './SignInForm-Styles';
+import {Buttons, SignInContainer} from "./SignInForm-Styles";
 
 export default function SignInForm() {
 
@@ -53,7 +54,7 @@ export default function SignInForm() {
     }
 
     return (
-        <div className='sign-in'>
+        <SignInContainer>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
 
@@ -64,14 +65,14 @@ export default function SignInForm() {
                 <FormInput type="password" required={true} onChange={handleChange} name="password" value={password}
                            label={'Password'}/>
 
-                <div className='buttons'>
+                <Buttons>
                     <CustomButton type="submit">Sign in</CustomButton>
                     <CustomButton type="button" onClick={signInWithGoogle} buttonType={buttonTypeClasses.google}>
                         Sign in with Google
                     </CustomButton>
-                </div>
+                </Buttons>
 
             </form>
-        </div>
+        </SignInContainer>
     )
 }

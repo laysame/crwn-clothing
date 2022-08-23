@@ -5,10 +5,10 @@ import {BackgroundImage, BodyContent, DirectoryItem} from "./MenuItem-Styles";
 
 function MenuItem({category, history}) {
 
-    const {title, imageUrl} = category;
+    const {title, imageUrl, linkUrl} = category;
 
     return (
-        <DirectoryItem onClick={() => history.push(`shop/${title}`)}>
+        <DirectoryItem onClick={() => history.push(linkUrl)}>
             <BackgroundImage imageUrl={imageUrl}/>
             <BodyContent>
                 <h2>{title}</h2>
