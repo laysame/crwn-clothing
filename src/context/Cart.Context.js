@@ -63,7 +63,7 @@ const INITIAL_STATE = {
 }
 
 const cartReducer = (state, action) => {
-    console.log(action);
+
     const {type, payload} = action;
 
     switch (type) {

@@ -8,12 +8,12 @@ import './Category.scss';
 export default function Category() {
 
     const {category} = useParams();
-    const {categoriesMap} = useContext(CategoriesContext);
-    const [products, setProducts] = useState(categoriesMap[category]);
+    const {categories} = useContext(CategoriesContext);
+    const [products, setProducts] = useState(categories[category]);
 
     useEffect(() => {
-        setProducts(categoriesMap[category]);
-    }, [category, categoriesMap]);
+        setProducts(categories[category]);
+    }, [category, categories]);
 
 
     return (

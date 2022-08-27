@@ -5,12 +5,12 @@ import {CategoriesContext} from "../../context/CategoriesContext";
 
 export default function CategoriesPreview() {
 
-    const {categoriesMap} = useContext(CategoriesContext);
+    const {categories} = useContext(CategoriesContext);
 
     return (
         <Fragment>
-            {Object.keys(categoriesMap).map((title) => {
-                const products = categoriesMap[title];
+            {Object.keys(categories).map((title) => {
+                const products = categories[title];
                 return (
                     <CategoryPreview key={title} title={title} products={products} />
                 )
