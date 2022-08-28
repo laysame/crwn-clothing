@@ -3,7 +3,7 @@ import MenuItem from '../../routes/menu-items/MenuItem';
 import {DirectoryContainer} from "./Directory-Styles";
 
 
-export default function Directory() {
+const Directory = () => {
 
     const categories = [
         {
@@ -48,4 +48,6 @@ export default function Directory() {
             }
         </DirectoryContainer>
     )
-}
+};
+
+export default Directory;

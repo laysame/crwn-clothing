@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
-
-import './CheckoutItem.scss';
 import {CartContext} from "../../context/Cart.Context";
+import './CheckoutItem.scss';
 
-export default function CheckoutItem({cartItem}) {
+
+const CheckoutItem = ({cartItem}) => {
 
     const {addItemToCart, removeItemFromCart, removeItemFromCheckout} = useContext(CartContext);
 
@@ -42,4 +42,6 @@ export default function CheckoutItem({cartItem}) {
             </div>
         </div>
     )
-}
+};
+
+export default CheckoutItem;

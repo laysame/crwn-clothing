@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import {
     createAuthUserWithEmailAndPassword,
     createUserProfileDocument,
-} from '../../firebase/Firebase.Utils';
+} from '../../utils/firebase/Firebase.Utils';
 import FormInput from "../form-input/FormInput";
 import CustomButton from "../custom-button/CustomButton";
 
 import "./SignUpForm.scss";
 
-export default function SignUpForm() {
+const SignUpForm = () => {
 
     const defaultFormFields = {
         displayName: '', email: '', password: '', confirmPassword: ''
@@ -17,16 +17,16 @@ export default function SignUpForm() {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {displayName, email, password, confirmPassword} = formFields;
 
-    function resetFormFields() {
+    const resetFormFields = () => {
         setFormFields(defaultFormFields);
     }
 
-    async function handleSubmit(event) {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (password !== confirmPassword) {
             alert("Password does not match");
-            return; //exit the function
+            return; //exits the function
         }
         try {
             const {user} = await createAuthUserWithEmailAndPassword(email, password);
@@ -42,9 +42,9 @@ export default function SignUpForm() {
         }
     }
 
-    function handleChange(event) {
-        const {name, value} = event.target;
+    const handleChange = (event) => {
 
+        const {name, value} = event.target;
         setFormFields({...formFields, [name]: value})
     }
 
@@ -69,4 +69,6 @@ export default function SignUpForm() {
                 <CustomButton type="submit">Sign Up</CustomButton>
             </form>
         </div>)
-}
+};
+
+export default SignUpForm;

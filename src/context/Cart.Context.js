@@ -1,5 +1,5 @@
 import React, {createContext, useReducer} from "react";
-import {createAction} from "../reducer/Reducer.utils";
+import {createAction} from "../utils/reducer/Reducer.utils";
 
 export const CART_ACTION_TYPES = {
     SET_IS_CART_OPEN: 'SET_IS_CART_OPEN',
@@ -8,7 +8,7 @@ export const CART_ACTION_TYPES = {
     SET_CART_TOTAL: 'SET_CART_TOTAL'
 }
 
-function addCartItem(cartItems, productToAdd) {
+const addCartItem = (cartItems, productToAdd) => {
     //find if the cartItem contains products to add
     //if found, increment quantity
     const currentCartItem = cartItems.find((CartItem) => CartItem.id === productToAdd.id);
@@ -21,7 +21,7 @@ function addCartItem(cartItems, productToAdd) {
     return [...cartItems, {...productToAdd, quantity: 1}];
 }
 
-function removeCartItem(cartItems, productToRemove) {
+const removeCartItem = (cartItems, productToRemove) => {
 
     return cartItems.reduce((accum, item) => {
         if (item.id === productToRemove.id) {
@@ -36,7 +36,7 @@ function removeCartItem(cartItems, productToRemove) {
     }, [])
 }
 
-function deleteItemFromCheckout(cartItems, productToRemove) {
+const deleteItemFromCheckout = (cartItems, productToRemove) => {
     return cartItems.filter((cartItem) => cartItem.id !== productToRemove.id);
 }
 
@@ -101,17 +101,17 @@ export const CartProvider = ({children}) => {
         ));
     }
 
-    function addItemToCart(product) {
+    const addItemToCart = (product) => {
         const newCartItems = addCartItem(cartItems, product);
         updateCartItemsReducer(newCartItems);
     }
 
-    function removeItemFromCart(product) {
+    const removeItemFromCart = (product) => {
         const newCartItems = removeCartItem(cartItems, product);
         updateCartItemsReducer(newCartItems);
     }
 
-    function removeItemFromCheckout(productToRemove) {
+    const removeItemFromCheckout = (productToRemove) => {
         const newCartItems = deleteItemFromCheckout(cartItems, productToRemove);
         updateCartItemsReducer(newCartItems);
     }

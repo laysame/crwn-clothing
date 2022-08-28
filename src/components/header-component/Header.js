@@ -2,43 +2,60 @@ import React, {Fragment, useContext} from 'react';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
 import {UserContext} from '../../context/User.Context';
 import {CartContext} from "../../context/Cart.Context";
-import {signOutUser} from '../../firebase/Firebase.Utils';
+import {signOutUser} from '../../utils/firebase/Firebase.Utils';
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 
 import {HeaderContainer, LogoContainer, NavLinks, NavLink} from "./Header-Styles";
 
-export default function Header() {
+
+const Header = () => {
 
     const {currentUser} = useContext(UserContext);
     const {isCartOpen} = useContext(CartContext);
 
     return (
         <Fragment>
+
             <HeaderContainer>
                 <LogoContainer to='/'>
                     <Logo/>
                 </LogoContainer>
                 <NavLinks>
-                    <NavLink to='/shop'>
-                        SHOP
-                    </NavLink>
                     {currentUser ?
-                        <NavLink as='span' onClick={signOutUser}>
-                            SIGN OUT
-                        </NavLink> :
-                        <NavLink to='/auth'>
-                            SIGN IN
-                        </NavLink>}
+                        <NavLinks>
+                            <NavLink to='/shop'>
+                                SHOP
+                            </NavLink>
+                            <NavLink to={'/orders'}>
+                                ORDERS
+                            </NavLink>
+                            <NavLink as='span' onClick={signOutUser}>
+                                SIGN OUT
+                            </NavLink>
+
+                        </NavLinks>
+                        :
+                        <NavLinks>
+                            <NavLink to='/shop'>
+                                SHOP
+                            </NavLink>
+                            <NavLink to='/auth'>
+                                SIGN IN
+                            </NavLink>
+                        </NavLinks>
+                    }
                     <CartIcon/>
                 </NavLinks>
+
                 {isCartOpen && <CartDropdown/>}
+
             </HeaderContainer>
         </Fragment>
-
-
     )
-}
+};
+
+export default Header;
 
 // check the truthiness and returns the last one (the component which will always be true because it is a function )
 // {isCartOpen && <CartDropdown/>}

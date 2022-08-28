@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useReducer} from "react";
-import {getCategoriesAndDocuments} from "../firebase/Firebase.Utils";
-import {createAction} from "../reducer/Reducer.utils";
+import {getCategoriesAndDocuments} from "../utils/firebase/Firebase.Utils";
+import {createAction} from "../utils/reducer/Reducer.utils";
 
 export const CategoriesContext = createContext({
     categories: {},
@@ -14,7 +14,7 @@ const INITIAL_STATE = {
     categories: {},
 }
 
-const categoriesMapReducer = (state, action) => {
+const categoriesReducer = (state, action) => {
 
     const {type, payload} = action;
 
@@ -31,7 +31,7 @@ const categoriesMapReducer = (state, action) => {
 
 export const CategoriesProvider = ({children}) => {
 
-    const [{categories}, dispatch] = useReducer(categoriesMapReducer, INITIAL_STATE);
+    const [{categories}, dispatch] = useReducer(categoriesReducer, INITIAL_STATE);
 
     const getCategoriesMap = async () => {
         const categories = await getCategoriesAndDocuments();

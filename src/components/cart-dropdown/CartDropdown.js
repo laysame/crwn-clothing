@@ -8,14 +8,17 @@ import {Link} from "react-router-dom";
 
 import {CartDropdownContainer, CartItems, EmptyMessage, ShowTotal} from "./CartDropdown-Styles.js";
 
-export default function CartDropdown() {
+const CartDropdown = () => {
     const {cartItems} = useContext(CartContext);
     const {cartTotal} = useContext(CartContext);
+
     return (
         <CartDropdownContainer>
             <CartItems>
                 {
-                    cartItems.length ? (cartItems.map(item => <CartItem key={item.id} cartItem={item}/>))
+                    cartItems.length ? (cartItems.map(item =>
+                            <CartItem key={item.id} cartItem={item}/>
+                        ))
                         : (<EmptyMessage> Your cart is empty</EmptyMessage>)
                 }
             </CartItems>
@@ -29,3 +32,4 @@ export default function CartDropdown() {
         </CartDropdownContainer>
     )
 }
+export default CartDropdown;

@@ -3,12 +3,12 @@ import FormInput from "../form-input/FormInput";
 import CustomButton, {buttonTypeClasses} from "../custom-button/CustomButton";
 import {
     signInAuthUserWithEmailAndPassword, signInWithGooglePopup
-} from '../../firebase/Firebase.Utils';
+} from '../../utils/firebase/Firebase.Utils';
 
 import './SignInForm-Styles';
 import {Buttons, SignInContainer} from "./SignInForm-Styles";
 
-export default function SignInForm() {
+const SignInForm = () => {
 
     const defaultFormFields = {
         email: '', password: ''
@@ -17,11 +17,11 @@ export default function SignInForm() {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {email, password} = formFields;
 
-    function resetFormFields() {
+    const resetFormFields = () => {
         setFormFields(defaultFormFields);
     }
 
-    async function handleSubmit(event) {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
@@ -42,14 +42,13 @@ export default function SignInForm() {
         }
     }
 
-    function handleChange(event) {
+    const handleChange = (event) => {
 
         const {name, value} = event.target;
-
         setFormFields({...formFields, [name]: value})
     }
 
-    async function signInWithGoogle() {
+    const signInWithGoogle = async () => {
         await signInWithGooglePopup();
     }
 
@@ -75,4 +74,6 @@ export default function SignInForm() {
             </form>
         </SignInContainer>
     )
-}
+};
+
+export default SignInForm;

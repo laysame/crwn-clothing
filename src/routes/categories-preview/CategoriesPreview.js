@@ -3,7 +3,7 @@ import CategoryPreview from "../../components/category-preview/CategoryPreview";
 import {CategoriesContext} from "../../context/CategoriesContext";
 
 
-export default function CategoriesPreview() {
+const CategoriesPreview = () => {
 
     const {categories} = useContext(CategoriesContext);
 
@@ -12,9 +12,11 @@ export default function CategoriesPreview() {
             {Object.keys(categories).map((title) => {
                 const products = categories[title];
                 return (
-                    <CategoryPreview key={title} title={title} products={products} />
+                    <CategoryPreview key={title} title={title} products={products}/>
                 )
             })}
         </Fragment>
     );
 };
+
+export default CategoriesPreview;

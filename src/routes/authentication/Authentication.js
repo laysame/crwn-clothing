@@ -4,11 +4,13 @@ import SignInForm from '../../components/sign-in/SignInForm';
 
 import './Authentication.scss';
 
-export default function Authentication() {
+const Authentication = () => {
     return (
         <div className='authentication-container'>
-            <SignInForm />
-            <SignUpForm />
+            <SignInForm/>
+            <SignUpForm/>
         </div>
     )
-}
+};
+
+export default Authentication;

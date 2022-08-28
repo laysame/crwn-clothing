@@ -5,7 +5,7 @@ import ProductCard from "../../components/product-card/ProductCard";
 
 import './Category.scss';
 
-export default function Category() {
+const Category = () => {
 
     const {category} = useParams();
     const {categories} = useContext(CategoriesContext);
@@ -14,7 +14,6 @@ export default function Category() {
     useEffect(() => {
         setProducts(categories[category]);
     }, [category, categories]);
-
 
     return (
         <div className='container'>
@@ -29,4 +28,6 @@ export default function Category() {
         </div>
 
     )
-}
+};
+
+export default Category;

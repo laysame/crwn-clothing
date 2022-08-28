@@ -3,7 +3,7 @@ import './ProductCard.scss';
 import CustomButton, {buttonTypeClasses} from "../custom-button/CustomButton";
 import {CartContext} from "../../context/Cart.Context";
 
-export default function ProductCard({product}) {
+const ProductCard = ({product}) => {
 
     const {name, price, imageUrl} = product;
     const {addItemToCart} = useContext(CartContext);
@@ -19,4 +19,6 @@ export default function ProductCard({product}) {
             <CustomButton onClick={addProductToCart} buttonType={buttonTypeClasses.inverted}>ADD TO CARD</CustomButton>
         </div>
     )
-}
+};
+
+export default ProductCard;

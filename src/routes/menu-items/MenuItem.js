@@ -3,7 +3,7 @@ import './MenuItem-Styles';
 import {withRouter} from "react-router-dom";
 import {BackgroundImage, BodyContent, DirectoryItem} from "./MenuItem-Styles";
 
-function MenuItem({category, history}) {
+const MenuItem = ({category, history}) => {
 
     const {title, imageUrl, linkUrl} = category;
 
