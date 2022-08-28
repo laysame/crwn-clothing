@@ -6,10 +6,12 @@ import ShopPage from './shop/ShopPage';
 import Header from './components/header-component/Header';
 import Authentication from './routes/authentication/Authentication';
 import CheckoutPage from "./routes/checkout-page/CheckoutPage";
+import Orders from "./components/order/Orders";
+
 import './App.css';
 
-
 export default function App() {
+
     return (
         <div>
             <Header/>
@@ -21,6 +23,7 @@ export default function App() {
                            <Authentication/>}
                 />
                 <Route path='/checkout' component={CheckoutPage}/>
+                <Route path='/orders' component={Orders}/>
             </Switch>
         </div>
     )
