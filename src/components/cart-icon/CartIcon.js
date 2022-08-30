@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {CartContext} from "../../context/Cart.Context";
+import {CartContext} from "../../context/cart-context";
 import {CartIconContainer, ItemCount, ShoppingCartIcon} from "./CartIcon-Styles";
 
 

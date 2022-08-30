@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Switch} from "react-router-dom";
 
 import Homepage from './routes/homepage/Homepage';
-import ShopPage from './shop/ShopPage';
+import ShopPagesRoutes from './shop/shop-pages-routes';
 import Header from './components/header-component/Header';
 import Authentication from './routes/authentication/Authentication';
 import CheckoutPage from "./routes/checkout-page/CheckoutPage";
@@ -17,7 +17,7 @@ const App = () => {
             <Header/>
             <Switch>
                 <Route exact path='/' component={Homepage}/>
-                <Route path='/shop/' component={ShopPage}/>
+                <Route path='/shop/' component={ShopPagesRoutes}/>
                 <Route path='/auth'
                        render={() =>
                            <Authentication/>}

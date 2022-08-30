@@ -1,6 +1,6 @@
 import React, {createContext, useReducer, useEffect} from "react";
-import {createUserProfileDocument, onAuthStateChangedListener} from "../utils/firebase/Firebase.Utils";
-import {createAction} from "../utils/reducer/Reducer.utils";
+import {createUserProfileDocument, onAuthStateChangedListener} from "../utils/firebase/firabase-utils";
+import {createAction} from "../utils/reducer/reducer-utils";
 
 // as the actual value you want to access
 // default value of context

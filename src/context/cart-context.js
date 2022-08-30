@@ -1,5 +1,5 @@
 import React, {createContext, useReducer} from "react";
-import {createAction} from "../utils/reducer/Reducer.utils";
+import {createAction} from "../utils/reducer/reducer-utils";
 
 export const CART_ACTION_TYPES = {
     SET_IS_CART_OPEN: 'SET_IS_CART_OPEN',

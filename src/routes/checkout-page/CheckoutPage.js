@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 
 import './CheckoutPage-Styles';
-import {CartContext} from "../../context/Cart.Context";
+import {CartContext} from "../../context/cart-context";
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 import PaymentForm from "../../components/payment-form/PaymentForm";
 import {CheckoutContainer, CheckoutHeader, HeaderBlock, Total} from "./CheckoutPage-Styles";

@@ -1,8 +1,8 @@
 import React, {Fragment, useContext} from 'react';
 import {ReactComponent as Logo} from '../../assets/crown.svg';
-import {UserContext} from '../../context/User.Context';
-import {CartContext} from "../../context/Cart.Context";
-import {signOutUser} from '../../utils/firebase/Firebase.Utils';
+import {UserContext} from '../../context/user-context';
+import {CartContext} from "../../context/cart-context";
+import {signOutUser} from '../../utils/firebase/firabase-utils';
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 

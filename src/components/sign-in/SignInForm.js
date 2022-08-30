@@ -3,7 +3,7 @@ import FormInput from "../form-input/FormInput";
 import CustomButton, {buttonTypeClasses} from "../custom-button/CustomButton";
 import {
     signInAuthUserWithEmailAndPassword, signInWithGooglePopup
-} from '../../utils/firebase/Firebase.Utils';
+} from '../../utils/firebase/firabase-utils';
 
 import './SignInForm-Styles';
 import {Buttons, SignInContainer} from "./SignInForm-Styles";

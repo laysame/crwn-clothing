@@ -1,7 +1,7 @@
 import React from "react";
-import './MenuItem-Styles';
+import './menu-item-styles';
 import {withRouter} from "react-router-dom";
-import {BackgroundImage, BodyContent, DirectoryItem} from "./MenuItem-Styles";
+import {BackgroundImage, BodyContent, DirectoryItem} from "./menu-item-styles";
 
 const MenuItem = ({category, history}) => {
 

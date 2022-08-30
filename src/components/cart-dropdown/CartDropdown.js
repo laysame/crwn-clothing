@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import CustomButton from "../custom-button/CustomButton";
 import CartItem from "../cart-items/CartItem";
 
-import {CartContext} from "../../context/Cart.Context";
+import {CartContext} from "../../context/cart-context";
 
 import {Link} from "react-router-dom";
 
