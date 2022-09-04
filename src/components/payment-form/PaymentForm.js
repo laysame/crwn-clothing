@@ -1,12 +1,12 @@
 import React, {useContext, useState} from "react";
 import {
     CardCvcElement,
-    CardElement, CardExpiryElement, CardNumberElement,
+    CardExpiryElement, CardNumberElement,
     useElements,
     useStripe
 } from "@stripe/react-stripe-js";
 import CustomButton, {buttonTypeClasses} from "../custom-button/CustomButton";
-import {ButtonContainer, FormContainer, PaymentFormContainer} from "./PaymentForm-Styles";
+import {PaymentFormContainer} from "./PaymentForm-Styles";
 import {UserContext} from "../../context/user-context";
 import {CartContext} from "../../context/cart-context";
 import {faCircleCheck, faCircleXmark, faCreditCard} from "@fortawesome/free-solid-svg-icons";
@@ -86,12 +86,11 @@ const PaymentForm = () => {
                         <CardExpiryElement/>
                         <Form.Label className="mt-2">Security Code</Form.Label>
                         <CardCvcElement/>
-                    <ButtonContainer>
+
                         <CustomButton
                             buttonType={buttonTypeClasses.base} isLoading={isProcessingPayment}>
                             Pay now
                         </CustomButton>
-                    </ButtonContainer>
                 </Form>
             </PaymentFormContainer>
         )
