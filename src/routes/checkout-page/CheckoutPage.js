@@ -23,7 +23,8 @@ const CheckoutPage = () => {
             {cartItems.map((cartItem) => (
                 <CheckoutItem key={cartItem.id} cartItem={cartItem}/>
             ))}
-            <Total>Total: €{cartTotal}</Total>
+
+            {cartTotal !== 0 ? <Total>Total: €{cartTotal}</Total> : null}
             <PaymentForm/>
         </CheckoutContainer>
     )
