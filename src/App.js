@@ -9,6 +9,7 @@ import CheckoutPage from "./routes/checkout-page/CheckoutPage";
 import Orders from "./components/orders/Orders";
 
 import './App.css';
+import PaymentForm from "./components/payment-form/PaymentForm";
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
                 />
                 <Route path='/checkout' component={CheckoutPage}/>
                 <Route path='/orders' component={Orders}/>
+                <Route path={'/payment'} component={PaymentForm} />
             </Switch>
         </div>
     )

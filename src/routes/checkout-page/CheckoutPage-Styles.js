@@ -29,6 +29,23 @@ export const HeaderBlock = styled.div`
 
 export const Total = styled.span`
   margin-top: 30px;
-  margin-left: auto;
-  font-size: 36px;
+  font-size: 25px;
+
+`;
+
+export const ButtonContainer = styled.div`
+  margin: 20px;
+  line-height: 60px;
+`
+
+export const ShopNowContainer = styled.div`
+  span {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 35px;
+  }
+
+  margin-top: 30px;
 `;

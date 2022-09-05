@@ -6,13 +6,14 @@ import {
     useStripe
 } from "@stripe/react-stripe-js";
 import CustomButton, {buttonTypeClasses} from "../custom-button/CustomButton";
-import {PaymentFormContainer} from "./PaymentForm-Styles";
+import {FormContainer, PaymentFormContainer} from "./PaymentForm-Styles";
 import {UserContext} from "../../context/user-context";
 import {CartContext} from "../../context/cart-context";
 import {faCircleCheck, faCircleXmark, faCreditCard} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './fontawesome-styles.scss';
 import {Form} from "react-bootstrap";
+
 
 const PaymentForm = () => {
     const stripe = useStripe();
@@ -61,7 +62,7 @@ const PaymentForm = () => {
         }
     };
 
-    if (paymentSuccessful) {
+ if (paymentSuccessful) {
         return (
             <PaymentFormContainer>
                 <FontAwesomeIcon icon={faCircleCheck} className='checked'/>
@@ -78,8 +79,8 @@ const PaymentForm = () => {
     } else {
         return (
             <PaymentFormContainer>
-                <h2><FontAwesomeIcon icon={faCreditCard} className={'card'}/> Credit Card Payment</h2>
-                <Form onSubmit={paymentHandler}>
+                    <Form onSubmit={paymentHandler} >
+                        <h3><FontAwesomeIcon icon={faCreditCard} className={'card'}/> Credit Card Payment</h3>
                         <Form.Label className="mt-2">Card Number</Form.Label>
                         <CardNumberElement/>
                         <Form.Label className="mt-2">Expiration Date</Form.Label>
@@ -91,7 +92,7 @@ const PaymentForm = () => {
                             buttonType={buttonTypeClasses.base} isLoading={isProcessingPayment}>
                             Pay now
                         </CustomButton>
-                </Form>
+                    </Form>
             </PaymentFormContainer>
         )
     }

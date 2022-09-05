@@ -1,14 +1,25 @@
 import React, {useContext} from "react";
-
 import './CheckoutPage-Styles';
 import {CartContext} from "../../context/cart-context";
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 import PaymentForm from "../../components/payment-form/PaymentForm";
-import {CheckoutContainer, CheckoutHeader, HeaderBlock, Total} from "./CheckoutPage-Styles";
+import {
+    ButtonContainer,
+    CheckoutContainer,
+    CheckoutHeader,
+    HeaderBlock,
+    ShopNowContainer,
+    Total
+} from "./CheckoutPage-Styles";
+import CustomButton, {buttonTypeClasses} from "../../components/custom-button/CustomButton";
+import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBagShopping} from "@fortawesome/free-solid-svg-icons";
 
 
 const CheckoutPage = () => {
     const {cartItems, cartTotal} = useContext(CartContext);
+
 
     return (
         <CheckoutContainer>
@@ -24,8 +35,23 @@ const CheckoutPage = () => {
                 <CheckoutItem key={cartItem.id} cartItem={cartItem}/>
             ))}
 
-            {cartTotal !== 0 ? <Total>Total: €{cartTotal}</Total> : null}
-            <PaymentForm/>
+            {cartTotal !== 0 ?
+                <ButtonContainer>
+                    <Total>Total: €{cartTotal} </Total>
+                    <Link to='/payment'>
+                        <CustomButton>GO TO PAYMENT</CustomButton>
+                    </Link>
+                </ButtonContainer>
+
+                : <ShopNowContainer>
+                    <span>You haven't select anything yet!</span>
+                    <span>
+                        <Link to={'/shop'}>Shop Now <FontAwesomeIcon
+                                  icon={faBagShopping}/>
+                        </Link>
+                    </span>
+                </ShopNowContainer>
+            }
         </CheckoutContainer>
     )
 };
