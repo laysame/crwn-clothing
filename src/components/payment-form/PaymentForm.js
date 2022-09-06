@@ -6,7 +6,7 @@ import {
     useStripe
 } from "@stripe/react-stripe-js";
 import CustomButton, {buttonTypeClasses} from "../custom-button/CustomButton";
-import {FormContainer, PaymentFormContainer} from "./PaymentForm-Styles";
+import {PaymentFormContainer} from "./PaymentForm-Styles";
 import {UserContext} from "../../context/user-context";
 import {CartContext} from "../../context/cart-context";
 import {faCircleCheck, faCircleXmark, faCreditCard} from "@fortawesome/free-solid-svg-icons";

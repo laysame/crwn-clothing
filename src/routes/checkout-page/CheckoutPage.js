@@ -2,7 +2,6 @@ import React, {useContext} from "react";
 import './CheckoutPage-Styles';
 import {CartContext} from "../../context/cart-context";
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
-import PaymentForm from "../../components/payment-form/PaymentForm";
 import {
     ButtonContainer,
     CheckoutContainer,
@@ -11,7 +10,7 @@ import {
     ShopNowContainer,
     Total
 } from "./CheckoutPage-Styles";
-import CustomButton, {buttonTypeClasses} from "../../components/custom-button/CustomButton";
+import CustomButton from "../../components/custom-button/CustomButton";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBagShopping} from "@fortawesome/free-solid-svg-icons";
