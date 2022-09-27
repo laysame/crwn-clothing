@@ -1,14 +1,14 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {CategoriesContext} from "../../context/categories-context";
 import ProductCard from "../../components/product-card/ProductCard";
-
 import './Category.scss';
+import {useSelector} from "react-redux";
+import {selectCategoriesMap} from "../../store/category/categoty-selector";
 
 const Category = () => {
 
     const {category} = useParams();
-    const {categories} = useContext(CategoriesContext);
+    const categories = useSelector(selectCategoriesMap);
     const [products, setProducts] = useState(categories[category]);
 
     useEffect(() => {
@@ -26,7 +26,6 @@ const Category = () => {
                 }
             </div>
         </div>
-
     )
 };
 
